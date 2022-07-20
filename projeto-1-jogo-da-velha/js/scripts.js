@@ -33,10 +33,10 @@ const checkWinCondition = () => {
       }
     });
 
-    if (o === 3) return console.log('o venceu');
-    if (x === 3) return console.log('x venceu');
+    if (o === 3) return declareWinner('o');
+    if (x === 3) return declareWinner('x');
 
-    if (isFilled()) return console.log('deu velha');
+    if (isFilled()) return declareWinner();
   };
 
   Object.keys(map).forEach((block) =>
@@ -93,3 +93,46 @@ boxes.forEach((box) => {
     }
   });
 });
+
+/**
+ * limpa o jogo, declara o vencedor e atualiza o placar
+ */
+const declareWinner = (winner) => {
+  const scoreboardO = document.getElementById('scoreboard-2');
+  const scoreboardX = document.getElementById('scoreboard-1');
+
+  let msg = '';
+
+  if (winner === 'o') {
+    scoreboardO.textContent = parseInt(scoreboardO.textContent) + 1;
+    msg = 'O jogador 1 venceu!';
+  } else if (winner === 'x') {
+    scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1;
+    msg = 'O jogador 2 venceu!';
+  } else {
+    msg = 'Deu velha!';
+  }
+
+  /**
+   * exibe msg
+   */
+  messageText.innerHTML = msg;
+  messageContainer.classList.remove('hide');
+
+  /**
+   * esconde msg
+   */
+  setTimeout(() => messageContainer.classList.add('hide'), 3000);
+
+  /**
+   * zera as jogadas
+   */
+  player1 = 0;
+  player2 = 0;
+
+  /**
+   * limpa o jogo
+   */
+  const boxesToRemove = document.querySelectorAll('.box div');
+  boxesToRemove.forEach((box) => box.parentNode.removeChild(box));
+};
