@@ -10,6 +10,7 @@ const app = express();
 app.listen(PORT, () => console.log(`O Express está rodando na porta ${PORT}`));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 /**
  * db connection

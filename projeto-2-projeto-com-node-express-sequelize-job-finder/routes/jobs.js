@@ -13,6 +13,7 @@ router.get('/test', (req, res) => res.send('Deu bom'));
  */
 router.post('/add', (req, res) => {
   const { title, salary, company, description, email, new_job } = req.body;
+  console.log(req.body);
 
   /**
    * insert
